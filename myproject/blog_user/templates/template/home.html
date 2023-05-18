@@ -1,0 +1,125 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog App</title>
+    <style>
+        /* Add your CSS styling here */
+        /* For simplicity, we'll only add basic styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .post {
+            margin-bottom: 20px;
+        }
+
+        .post h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .post p {
+            margin-bottom: 10px;
+        }
+
+        .post .date {
+            font-size: 12px;
+            color: #999;
+        }
+
+        
+        /* CSS styling for the navigation bar */
+        ul.navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #45a049;
+        }
+
+        ul.navbar li {
+            float: left;
+        }
+
+        ul.navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        ul.navbar li a:hover {
+            background-color: #111;
+        }
+        
+        .footer {
+            background-color: #45a049;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+  {% block content %}
+ 
+
+  <ul class="navbar">
+    <li><a href="">Home</a></li>
+    <li><a href="about">About</a></li>
+    <li><a href="addpost">Add Post</a></li>
+    <li><a href="popular">Popular</a></li>
+    <li><a href="login">login</a></li>
+</ul>
+    <div class="container">
+        <h1></h1>
+        {% if posts %}
+            {% for post in posts %}
+                <div class="post">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.content }}</p>
+                    <p class="date">{{ post.date }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No posts available.</p>
+        {% endif %}
+    </div>
+    <div>
+        <img src="{% static 'images/home2.jpg' %}" alt="Example Image" height="500px" width="1350px">
+        </div>
+
+     </div>
+    {% block footer %}
+    <!-- Footer content specific to this template -->
+    <div class="content">
+      <!-- Your website content here -->
+  </div>
+  
+  <div class="footer">
+      &copy; 2023 Your Website. All rights reserved.
+  </div>
+{% endblock %}
+
+
+ {% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+

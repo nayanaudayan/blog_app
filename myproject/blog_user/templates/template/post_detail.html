@@ -1,0 +1,63 @@
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <p class="card-text">{{ post.content }}</p>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{ post.created_on|date:'F j, Y' }} by {{ post.author }}
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title">Comments ({{ comments.count }})</h4>
+            {% for comment in comments %}
+              <div class="card mb-2">
+                <div class="card-body">
+                  <h5 class="card-title">{{ comment.author }} <small class="text-muted">{{ comment.created_on|date:'F j, Y' }}</small></h5>
+                  <p class="card-text">{{ comment.content }}</p>
+                </div>
+              </div>
+            {% empty %}
+              <p>No comments yet.</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title">Add a comment</h4>
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="id_author">Name</label>
+                <input type="text" name="author" id="id_author" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="id_content">Comment</label>
+                <textarea name="content" id="id_content" class="form-control" rows="3" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title">About</h4>
+            <p class="card-text">This is a blog about Django.</p>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="card-title">Categories</h4>
+            <ul class="list-unstyled mb-0">
+              {% for category in categories %}
+                <li><a href="{% url 'category' category.slug %}">{{ category.name }}</a></li>
+              {% empty %}
+                <li>No categories yet.</li>
+              {% endfor %}
